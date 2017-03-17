@@ -22,6 +22,10 @@ BACKUP_UTILS_VERSION="$(cat $GHE_BACKUP_ROOT/share/github-backup-utils/version)"
 
 # Add the bin and share/github-backup-utils dirs to PATH
 PATH="$GHE_BACKUP_ROOT/bin:$GHE_BACKUP_ROOT/share/github-backup-utils:$PATH"
+# In Solaris 11 reassure that gnu utils are used and add /usr/sbin for unlink
+if [ "SunOS 5.11" = "$(uname -sr)" ]; then
+  PATH="/usr/gnu/bin:$PATH:/usr/sbin"
+fi
 
 . $GHE_BACKUP_ROOT/share/github-backup-utils/bm.sh
 
